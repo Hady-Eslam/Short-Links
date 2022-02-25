@@ -1,0 +1,24 @@
+{% extends 'Url/base.html' %}
+
+{% block title %} Urls {% endblock %}
+
+{% block content %}
+    <br />
+            
+    <h1 class="text-center" >Urls</h1>
+
+    {% for url_obj in object_list %}
+
+        <br />
+
+        <div class="media position-relative">
+            <div class="media-body">
+            <h5 class="mt-0">{{ url_obj.title }}</h5>
+            <p>{{ url_obj.description }}</p>
+            <a href="{% url 'Url:Url' url_obj.id %}" class="btn btn-success stretched-link">Edit Link</a>
+            </div>
+        </div>
+
+    {% endfor %}
+    
+{% endblock %}

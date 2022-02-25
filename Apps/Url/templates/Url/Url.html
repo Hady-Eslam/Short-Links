@@ -1,0 +1,95 @@
+{% extends 'Url/base.html' %}
+{% load static %}
+
+{% block title %} {{ form.title.value }} {% endblock %}
+
+{% block content %}
+
+    {% if request.flash_message.exists.success_create_url %}
+        {% include 'Url/utilts/model.html' with ModelMessage=request.flash_message.success_create_url %}
+    {% elif request.flash_message.exists.success_edit_url %}
+        {% include 'Url/utilts/model.html' with ModelMessage=request.flash_message.success_edit_url %}
+    {% endif %}
+
+    <br /><br /><br />
+
+    <h1 class="text-center">{{ form.title.value }}</h1>
+
+    <form method="post" id="Form">
+
+        {% csrf_token %}
+
+        <div class="form-row">
+        
+            <div class="col-md-8 mb-3">
+                <label for="title">Url Title</label>
+                <input type="text" class="form-control" name="title" id="title" required
+                    value="{{ form.title.value|default:'' }}" placeholder="Enter Url Title Here">
+                <small style="color: #dc3545;" id="title-errors">
+                    {{ form.title.errors }}
+                </small>
+            </div>
+        
+        </div>
+
+        <br />
+
+        <div class="form-row">
+        
+            <div class="col-md-8 mb-3">
+                <label for="long-url">Url Long Url</label>
+                <input type="text" class="form-control" name="url" id="long-url" required
+                    value="{{ form.url.value|default:'' }}" placeholder="Enter Long Url Here">
+                <small style="color: #dc3545;" id="long-url-errors">
+                    {{ form.url.errors }}
+                </small>
+            </div>
+        
+        </div>
+
+        <br />
+
+        <div class="form-row">
+        
+            <div class="col-md-8 mb-3">
+                <label for="description">Url Description</label>
+                <textarea class="form-control" id="description" name="description" required rows="4"
+                    placeholder="Enter Url Description Here">{{ form.description.value|default:'' }}</textarea>
+                <small style="color: #dc3545;" id="description-errors">
+                    {{ form.description.errors }}
+                </small>
+            </div>
+        
+        </div>
+
+        <br />
+
+        <div class="form-row">
+        
+            <div class="col-md-8 mb-3">
+                <label for="short_url">Short Url</label>
+                <input type="text" class="form-control" id="short-url" required
+                    value="{{ object.updated_short_url }}" disabled>
+            </div>
+        
+        </div>
+
+        <br />
+
+        <button class="btn btn-success" type="submit">Edit Url</button>
+        
+      </form>
+
+      <br />
+
+      <button class="btn btn-danger" id="Delete" Url="{% url 'Url:Url' object.id %}" Home="{% url '' %}">Delete Url</button>
+      <br /><br /><br />
+
+{% endblock %}
+
+
+
+
+{% block scripts %}
+<script src="{% static 'Url/javascript/url.js' %}"></script>
+{% endblock %}

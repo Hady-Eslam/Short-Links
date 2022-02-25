@@ -1,0 +1,78 @@
+{% extends 'Url/base.html' %}
+{% load static %}
+
+{% block title %} Create New Link {% endblock %}
+
+
+
+{% block content %}
+
+    <br /><br /><br />
+
+    <h1 class="text-center">Create New Link</h1>
+
+    <br /><br />
+
+    <form method="post" id="Form">
+
+        {% csrf_token %}
+
+        <div class="form-row">
+        
+            <div class="col-md-8 mb-3">
+                <label for="title">Url Title</label>
+                <input type="text" class="form-control" name="title" id="title" required
+                    value="{{ form.title.value|default:'' }}" placeholder="Enter Url Title Here">
+                <small style="color: #dc3545;" id="title-errors">
+                    {{ form.title.errors }}
+                </small>
+            </div>
+        
+        </div>
+
+        <br />
+
+        <div class="form-row">
+        
+            <div class="col-md-8 mb-3">
+                <label for="long-url">Url Long Url</label>
+                <input type="text" class="form-control" name="url" id="long-url" required
+                    value="{{ form.url.value|default:'' }}" placeholder="Enter Long Url Here">
+                <small style="color: #dc3545;" id="long-url-errors">
+                    {{ form.url.errors }}
+                </small>
+            </div>
+        
+        </div>
+
+        
+        <br />
+
+        <div class="form-row">
+        
+            <div class="col-md-8 mb-3">
+                <label for="description">Url Description</label>
+                <textarea class="form-control" id="description" name="description" required rows="4"
+                    placeholder="Enter Url Description Here">{{ form.description.value|default:'' }}</textarea>
+                <small style="color: #dc3545;" id="description-errors">
+                    {{ form.description.errors }}
+                </small>
+            </div>
+        
+        </div>
+
+        <br />
+
+        <button class="btn btn-success" type="submit">Create Url</button>
+
+
+      </form>
+      <br /><br /><br />
+{% endblock %}
+
+
+
+
+{% block scripts %}
+<script src="{% static 'Url/javascript/createUrl.js' %}"></script>
+{% endblock %}
